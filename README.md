@@ -13,12 +13,12 @@ It seemed reasonable initially to divide the comparison cases up as follows:
 - Cases where types differ
 - Cases with primitive types
 - Arrays
- - Cases where the array lengths differ
- - The function should be able to handle arrays which contain nested arrays or objects
+    - Cases where the array lengths differ
+    - The function should be able to handle arrays which contain nested arrays or objects
 - Objects
- - Cases where objects have differing numbers of properties
- - Cases where some property names differ
- - Cases where some property values differ
+    - Cases where objects have differing numbers of properties
+    - Cases where some property names differ
+    - Cases where some property values differ
 
 In general, I created failing tests for each case and then wrote enough code to pass each test before writing the next test. After creating and testing a working function, I identified a few edge cases I hadn't thought of:
 
