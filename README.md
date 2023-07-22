@@ -1,63 +1,41 @@
 # OakNorth JavaScript Home Test
 
-## The challenge
+Hello there! I took the liberty of recording a Loom video of my completion of this challenge in case you're interested in seeing how I reasoned my way through things step by step.
 
-The aim of this exercise is to demonstrate your problem solving and understanding of JavaScript by implementing something found in every unit testing tool - an "assertEquals" method.
+Video link: https://www.loom.com/share/d92884d2579b4fedad1dc031d0541091 📹
 
-### To do at home
+Below, I'll detail my general process, and fill in the blanks as to what changes were made between the end of the loom video and the final commit. I also added some things I'd do differently next time.
 
-- Fill in the "assertEquals" function provided such that it will correctly compare the "expected" and "actual" parameters.
-- The parameters could be of any conceivable JavaScript type, but we only expect you to handle primitive data types (e.g. strings and numbers) and simple arrays to start with
-- You can work with the code we've given you, or rewrite bits if that works best for you. You may add extra functions and files as you see fit.
-- Credit will be given for approach, correctness, clean code, and testing.
-- The set of tests provided isn't exhaustive - there are many cases not covered here. We expect you to add additional tests, and to amend ours as you see fit.
-- We don't expect you to progress to dealing with more complex data types than those shown here.
-- We respect your time, and - assuming you are already familiar with JavaScript - we do not expect you to spend more than an hour doing this exercise.
+## The process 🛠️
 
-### Additional terms
+It seemed reasonable initially to divide the comparison cases up as follows:
 
-- Please do not use external libraries (except for a testing library)
-- You may of course use any resources you like to assist you with specific techniques, syntax etc - but please do not just copy code.
-- Please don't share this exercise with anyone else :)
-- We've written some initial tests for you using Jest, which is our testing library of choice. You may use a different library if you wish.
+- Cases where types differ
+- Cases with primitive types
+- Arrays
+ - Cases where the array lengths differ
+ - The function should be able to handle arrays which contain nested arrays or objects
+- Objects
+ - Cases where objects have differing numbers of properties
+ - Cases where some property names differ
+ - Cases where some property values differ
 
-### Example inputs and outputs
+In general, I created failing tests for each case and then wrote enough code to pass each test before writing the next test. After creating and testing a working function, I identified a few edge cases I hadn't thought of:
 
-| Expected        |     Actual      |                                                                 Result |
-| --------------- | :-------------: | ---------------------------------------------------------------------: |
-| "abc"           |      "abc"      |                                                             _No error_ |
-| "abcef"         |      "abc"      |           Throws error with message 'Expected "abcef" but found "abc"' |
-| 1               |        1        |                                                             _No error_ |
-| 1               |        2        |                     Throws error with message 'Expected 1 but found 2' |
-| 1               |       '1'       | Throws error with message 'Expected type number but found type string' |
-| ['a', 'b', 'c'] | ['a', 'b', 'c'] |                                                             _No error_ |
-| ['a', 'b']      | ['a', 'b', 'c'] |        Throws error with message 'Expected array length 2 but found 3' |
-| ['a', 'b']      |   ['a', 'd']    |                 Throws error with message 'Expected "b" but found "d"' |
+- What happens if one or both arguments are missing?
+- What happens if one or both arguments are `null`?
+- What happens if one or both arguments are `NaN`?
 
-### Instructions for running the tests
+I was also unsure whether or not it's actually desirable behaviour for assertEquals to return true if both arguments are `undefined`. I decided to leave this behaviour for now, but feel free to let me know if it would be better to throw an error in such cases in practice—presumably TypeScript makes it slightly harder for edge cases like this to even occur to begin with though!
 
-With yarn:
+I tested and supplied relevant code to handle the other identified edge cases, and tidied my code up slightly.
 
-- Run `yarn` to install dependencies
-- Run `yarn test` to run the tests
+## What I'd do differently next time 📝
 
-With npm:
+I'm still learning how to make the best use of Jest, and could probably have outlined tests that need to be written ahead of schedule using `.todo` and structured my work a bit further into the future that way. This might also have avoided the couple of times I realised my code was doing something I hadn't set up a test for yet and had to comment it out and make sure a failing test was ready before continuing.
 
-- Run `npm install`
-- Run `npm test`
+I also noticed that my use of `describe` was veering a bit towards "nesting hell". I could probably have saved an indentation-level or two, and kept the test blocks a line or two shorter, by using a single describe for *all* of a given group of tests that throws or doesn't throw an error, and then named the individual cases with `it` instead of nesting a second `describe` with its own `it` inside.
 
-## How to prepare for the pairing exercise
+I enjoyed this challenge: learning about Jest was already on my immediate todo list and, as a big believer in the [Feynman technique](https://todoist.com/inspiration/feynman-technique), an opportunity to explain the things I've been learning is always appreciated! 😁
 
-- The pairing exercise will be conducted remotely via [Microsoft Teams](https://www.microsoft.com/en/microsoft-teams/group-chat-software) or [Zoom](https://zoom.us/). If you haven't used this before, we recommend getting comfortable with it in advance. In order to share your screen, you may have to update your browser settings and restart the browser. Doing this in advance will save us time and hassle during the pairing session.
-- Please have your chosen text editor or IDE ready to go, with the code open on your screen. You should be able to run the tests.
-
-## What to expect from the pairing exercise
-
-- You'll meet two of our fullstack engineers. As well as pairing, it will be an informal opportunity to get to know them and ask questions about working at OakNorth.
-- We allow an hour for the session. Usually that's about 5 minutes of introductions, 45 minutes of coding, and 10 minutes for questions at the end.
-- You'll share your screen with us. You'll talk us through the code you've written so far. Then we'll work together to add new functionality.
-- We usually start by implementing object comparison. If time allows, we'll move on to comparing more complex objects.
-- We will insist on practising test driven development with you.
-- As well as assessing your JavaScript and TDD skills, we'll be looking for excellent communication skills, initiative, willingness to learn, and ability to cope under pressure.
-- You can ask us questions and Google things at any time during the test.
-- We know that it's difficult to write your best code while being watched by two people you don't know. We don't expect perfection, and will do our best to make the experience as comfortable and enjoyable for you as we can. Please let us know if you'd like us to make any adjustments.
+I look forward to hearing from you, and to the pairing exercise!
